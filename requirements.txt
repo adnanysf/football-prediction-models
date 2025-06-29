@@ -2,3 +2,5 @@ fastapi[standard]
 uvicorn[standard]
 python-dotenv
 requests
+datetime
+requests_cache
