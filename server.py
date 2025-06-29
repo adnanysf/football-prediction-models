@@ -85,6 +85,17 @@ async def get_stats(teamId: int, leagueId: int):
 
     response = requests.request("GET", url, headers=headers, data=payload)
     if response.status_code == 200:
-        return response.json()
+        stats = response.json().get('response', {})
+        if not stats:
+            return {"error": "No statistics found for the given team and league."}
+        goals_stats = stats.get('goals', {})
+        if not goals_stats:
+            return {"error": "No goals statistics found for the given team and league."}
+        response = {
+            'team_id': teamId,
+            'league_id': leagueId,
+            'goals': goals_stats
+        }
+        return response
     else:
         return {"error": f"Failed to fetch stats: {response.status_code}"}
