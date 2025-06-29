@@ -92,6 +92,7 @@ async def get_stats(teamId: int, leagueId: int):
         if not goals_stats:
             return {"error": "No goals statistics found for the given team and league."}
         response = {
+            'team_name': stats.get('team', {}).get('name', ''),
             'team_id': teamId,
             'league_id': leagueId,
             'goals': goals_stats
