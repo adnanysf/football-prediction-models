@@ -11,10 +11,12 @@ class PoissonModel:
     def predict(self):
         homeTeamName = self.home['team_name']
         awayTeamName = self.away['team_name']
-        self.home_goals = self.home['goals']['for']['average']['home']
-        self.away_goals = self.away['goals']['for']['average']['away']
-        self.home_conceded = self.home['goals']['against']['average']['home']
-        self.away_conceded = self.away['goals']['against']['average']['away']
+        
+        # Convert string values to float if necessary
+        self.home_goals = float(self.home['goals']['for']['average']['home'])
+        self.away_goals = float(self.away['goals']['for']['average']['away'])
+        self.home_conceded = float(self.home['goals']['against']['average']['home'])
+        self.away_conceded = float(self.away['goals']['against']['average']['away'])
         league_average = 1.4
         
         home_attack_strength = self.home_goals / league_average
